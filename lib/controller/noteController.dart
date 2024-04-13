@@ -8,11 +8,19 @@ import 'package:note_app/model/model.dart';
 class NoteController extends GetxController {
   TextEditingController addnote = TextEditingController();
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
+ @override
+  Future<void> onInit() async {
     super.onInit();
-    getNote();
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) {
+        getNote();
+      } else {
+        noteList.clear();
+      }
+    });
+    if (auth.currentUser != null) {
+      await getNote();
+    }
   }
 
   final noteList = <NoteModel>[].obs;
