@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/model/model.dart';
@@ -8,9 +9,10 @@ import 'package:note_app/model/model.dart';
 class NoteController extends GetxController {
   TextEditingController addnote = TextEditingController();
 
- @override
+  @override
   Future<void> onInit() async {
     super.onInit();
+
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
         getNote();
@@ -28,7 +30,7 @@ class NoteController extends GetxController {
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
   AuthController authController = Get.put(AuthController());
-
+// dialog box
   void showAddNoteDialog() {
     Get.defaultDialog(
       title: "Add Note",
@@ -44,8 +46,6 @@ class NoteController extends GetxController {
       onConfirm: () {
         // Add your note here
         addNote();
-        getNote();
-        addnote.clear();
         Get.back();
       },
       onCancel: () {
@@ -54,6 +54,7 @@ class NoteController extends GetxController {
     );
   }
 
+// add note function
   void addNote() async {
     var notemodel = NoteModel(
       note: addnote.text,
@@ -68,11 +69,11 @@ class NoteController extends GetxController {
 
     getNote();
 
-    Get.snackbar("To do Added", "To do Added to Firestore",
+    Get.snackbar("Note Added", "Note Added to Firestore",
         backgroundColor: Colors.green);
   }
-  // getnote from fireStrore
 
+// get note function
   Future<void> getNote() async {
     try {
       var data = await db
@@ -85,6 +86,25 @@ class NoteController extends GetxController {
       for (var note in data.docs) {
         noteList.add(NoteModel.fromJson(note.data()));
       }
+    } catch (ex) {
+      Get.snackbar("Error", ex.toString());
+    }
+  }
+
+// delete note function
+
+  Future<void> deleteNote(String noteId) async {
+    try {
+      await db
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection("note")
+          .doc(noteId)
+          .delete();
+      // After deleting the note, refresh the note list
+      await getNote();
+      Get.snackbar("Note Deleted", "Note Deleted from Firestore",
+          backgroundColor: Colors.red);
     } catch (ex) {
       Get.snackbar("Error", ex.toString());
     }

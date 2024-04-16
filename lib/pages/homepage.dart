@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/controller/noteController.dart';
+import 'package:note_app/model/model.dart';
 import 'package:note_app/welcome.dart';
 
 class HomePage extends StatelessWidget {
@@ -51,6 +52,12 @@ class HomePage extends StatelessWidget {
                           e.note.toString(),
                           style: TextStyle(fontSize: 22),
                         ),
+                        trailing: IconButton(
+                            onPressed: () {
+                              String noteIdToDelete = e.noteI.toString();
+                              noteController.deleteNote(noteIdToDelete);
+                            },
+                            icon: Icon(Icons.delete)),
                       ),
                     ),
                   )
