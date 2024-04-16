@@ -15,19 +15,20 @@ class Welcome extends StatelessWidget {
           children: [
             ElevatedButton(
                 onPressed: () {
-                  Get.to(Login());
+                  Get.to(() => const Login());
                 },
-                child: Text("Login")),
-            SizedBox(
+                child: const Text("Login")),
+            const SizedBox(
               height: 25,
             ),
             ElevatedButton(
-                onPressed: () {
-                  Get.to(Signup());
-                },
-                child: Text(
-                  "Sign Up",
-                )),
+              onPressed: () {
+                Get.to(() => const Signup());
+              },
+              child: const Text(
+                "Sign Up",
+              ),
+            ),
           ],
         ),
       ),
