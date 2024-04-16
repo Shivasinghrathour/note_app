@@ -8,7 +8,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SplashController splashController = Get.put(SplashController());
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text("Note App"),
       ),

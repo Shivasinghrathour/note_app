@@ -23,9 +23,9 @@ class AuthController extends GetxController {
   }
   // login function
 
-  void login() {
+  void login() async {
     try {
-      auth.signInWithEmailAndPassword(
+      await auth.signInWithEmailAndPassword(
         email: email.text,
         password: pass.text,
       );

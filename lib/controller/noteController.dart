@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/model/model.dart';
@@ -36,7 +35,7 @@ class NoteController extends GetxController {
       title: "Add Note",
       content: TextFormField(
         controller: addnote,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: "Enter your note",
         ),
       ),
@@ -65,7 +64,8 @@ class NoteController extends GetxController {
         .collection("users")
         .doc(auth.currentUser!.uid)
         .collection("note")
-        .add(notemodel.toJson());
+        .doc(notemodel.noteI)
+        .set(notemodel.toJson());
 
     getNote();
 
@@ -86,6 +86,8 @@ class NoteController extends GetxController {
       for (var note in data.docs) {
         noteList.add(NoteModel.fromJson(note.data()));
       }
+
+      noteList.refresh();
     } catch (ex) {
       Get.snackbar("Error", ex.toString());
     }
@@ -95,21 +97,20 @@ class NoteController extends GetxController {
 
 // delete note function
   Future<void> deleteNote(String noteId) async {
-    String noteIds = 
-    try {
-      await db
-          .collection("users")
-          .doc(auth.currentUser!.uid)
-          .collection("note")
-          .doc(noteId)
-          .delete();
-      // After deleting the note, refresh the note list
-      await getNote();
+    await db
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("note")
+        .doc(noteId)
+        .delete()
+        .then((value) {
       Get.snackbar("Note Deleted", "Note Deleted from Firestore",
           backgroundColor: Colors.red);
-    } catch (ex) {
-      Get.snackbar("Error", ex.toString());
-    }
+
+      getNote();
+    }).onError((error, stackTrace) {
+      Get.snackbar("Error", error.toString());
+    });
   }
 
 }
