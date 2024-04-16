@@ -56,7 +56,7 @@ class NoteController extends GetxController {
   }
 
 // edit dialog box
-  void showEditNoteDialog() {
+  void showEditNoteDialog({required String docNoteID}) {
     Get.defaultDialog(
       title: "Edit Note",
       content: TextFormField(
@@ -71,7 +71,7 @@ class NoteController extends GetxController {
       onConfirm: () {
         // Add your note here
         Get.back();
-        editNote(DateTime.now().millisecondsSinceEpoch.toString()+);
+        editNote(noteDocID: docNoteID);
       },
       onCancel: () {
         addnote.clear();
@@ -140,13 +140,12 @@ class NoteController extends GetxController {
   }
 
 // edit not function
-  Future<void> editNote(String edit) async {
-   
+  Future<void> editNote({required String noteDocID}) async {
     await db
         .collection("users")
         .doc(auth.currentUser!.uid)
         .collection("note")
-        .doc(edit)
+        .doc(noteDocID)
         .update({"note": editnote.text});
     editnote.clear();
     getNote();

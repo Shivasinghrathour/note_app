@@ -17,25 +17,25 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           noteController.showAddNoteDialog();
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
       ),
       appBar: AppBar(
-        title: Text("Add Your Note"),
+        title: const Text("Add Your Note"),
         actions: [
           IconButton(
               onPressed: () {
                 authController.logout();
-                Get.offAll(Welcome());
+                Get.offAll(const Welcome());
               },
-              icon: Icon(Icons.logout))
+              icon: const Icon(Icons.logout))
         ],
         backgroundColor: Colors.amber,
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Obx(() => Column(
@@ -47,21 +47,22 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: ListTile(
-                          leading: Icon(Icons.check),
+                          leading: const Icon(Icons.check),
                           title: Text(
                             e.note.toString(),
-                            style: TextStyle(fontSize: 22),
+                            style: const TextStyle(fontSize: 22),
                           ),
-                          trailing: Container(
+                          trailing: SizedBox(
                             width: 100,
                             child: Row(
                               children: [
                                 // edit icon
                                 IconButton(
                                   onPressed: () {
-                                    noteController.showEditNoteDialog();
+                                    noteController.showEditNoteDialog(
+                                        docNoteID: e.noteI.toString());
                                   },
-                                  icon: Icon(Icons.edit),
+                                  icon: const Icon(Icons.edit),
                                 ),
                                 // delete icon
                                 IconButton(
@@ -70,7 +71,7 @@ class HomePage extends StatelessWidget {
 
                                     noteController.deleteNote(noteIdToDelete);
                                   },
-                                  icon: Icon(Icons.delete),
+                                  icon: const Icon(Icons.delete),
                                 ),
                               ],
                             ),
