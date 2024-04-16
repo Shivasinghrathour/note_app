@@ -55,7 +55,8 @@ class HomePage extends StatelessWidget {
                         trailing: IconButton(
                             onPressed: () {
                               String noteIdToDelete = e.noteI.toString();
-                              noteController.deleteNote(noteIdToDelete);
+
+                              print(e.noteI.toString());
                             },
                             icon: Icon(Icons.delete)),
                       ),

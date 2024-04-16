@@ -93,7 +93,9 @@ class NoteController extends GetxController {
 
 // delete note function
 
+// delete note function
   Future<void> deleteNote(String noteId) async {
+    String noteIds = 
     try {
       await db
           .collection("users")
@@ -109,4 +111,5 @@ class NoteController extends GetxController {
       Get.snackbar("Error", ex.toString());
     }
   }
+
 }
