@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/controller/noteController.dart';
+import 'package:note_app/model/model.dart';
 import 'package:note_app/welcome.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,29 +17,28 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           noteController.showAddNoteDialog();
         },
-        child: const Icon(
+        child: Icon(
           Icons.add,
         ),
       ),
       appBar: AppBar(
-        title: const Text("Add Your Note"),
+        title: Text("Add Your Note"),
         actions: [
           IconButton(
               onPressed: () {
                 authController.logout();
-                Get.offAll(const Welcome());
+                Get.offAll(Welcome());
               },
-              icon: const Icon(Icons.logout))
+              icon: Icon(Icons.logout))
         ],
         backgroundColor: Colors.amber,
       ),
       body: Column(
         children: [
-          const SizedBox(
+          SizedBox(
             height: 15,
           ),
-          Obx(
-            () => Column(
+          Obx(() => Column(
               children: noteController.noteList
                   .map(
                     (e) => Container(
@@ -47,24 +47,37 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: ListTile(
-                        leading: const Icon(Icons.check),
-                        title: Text(
-                          e.note.toString(),
-                          style: const TextStyle(fontSize: 22),
-                        ),
-                        trailing: IconButton(
-                            onPressed: () {
-                              String noteIdToDelete = e.noteI.toString();
+                          leading: Icon(Icons.check),
+                          title: Text(
+                            e.note.toString(),
+                            style: TextStyle(fontSize: 22),
+                          ),
+                          trailing: Container(
+                            width: 100,
+                            child: Row(
+                              children: [
+                                // edit icon
+                                IconButton(
+                                  onPressed: () {
+                                    noteController.showEditNoteDialog();
+                                  },
+                                  icon: Icon(Icons.edit),
+                                ),
+                                // delete icon
+                                IconButton(
+                                  onPressed: () {
+                                    String noteIdToDelete = e.noteI.toString();
 
-                              print(e.noteI.toString());
-                            },
-                            icon: const Icon(Icons.delete)),
-                      ),
+                                    noteController.deleteNote(noteIdToDelete);
+                                  },
+                                  icon: Icon(Icons.delete),
+                                ),
+                              ],
+                            ),
+                          )),
                     ),
                   )
-                  .toList(),
-            ),
-          )
+                  .toList()))
         ],
       ),
     );

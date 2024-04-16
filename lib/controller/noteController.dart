@@ -7,6 +7,7 @@ import 'package:note_app/model/model.dart';
 
 class NoteController extends GetxController {
   TextEditingController addnote = TextEditingController();
+  TextEditingController editnote = TextEditingController();
 
   @override
   Future<void> onInit() async {
@@ -29,6 +30,7 @@ class NoteController extends GetxController {
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
   AuthController authController = Get.put(AuthController());
+  NoteModel noteModel = Get.put(NoteModel());
 // dialog box
   void showAddNoteDialog() {
     Get.defaultDialog(
@@ -46,6 +48,30 @@ class NoteController extends GetxController {
         // Add your note here
         addNote();
         Get.back();
+      },
+      onCancel: () {
+        addnote.clear();
+      },
+    );
+  }
+
+// edit dialog box
+  void showEditNoteDialog() {
+    Get.defaultDialog(
+      title: "Edit Note",
+      content: TextFormField(
+        controller: editnote,
+        decoration: const InputDecoration(
+          hintText: "Edit your note",
+        ),
+      ),
+      textConfirm: "Edit",
+      textCancel: "Cancel",
+      confirmTextColor: Colors.white,
+      onConfirm: () {
+        // Add your note here
+        Get.back();
+        editNote(DateTime.now().millisecondsSinceEpoch.toString()+);
       },
       onCancel: () {
         addnote.clear();
@@ -94,23 +120,35 @@ class NoteController extends GetxController {
   }
 
 // delete note function
-
-// delete note function
   Future<void> deleteNote(String noteId) async {
+    try {
+      await db
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection("note")
+          .doc(noteId)
+          .delete()
+          .then((value) => {
+                Get.snackbar(
+                    "Note Deleted", "Note Successfully Deleted form Firestore",
+                    backgroundColor: Colors.green)
+              });
+      getNote();
+    } catch (ex) {
+      Get.snackbar("Error", ex.toString());
+    }
+  }
+
+// edit not function
+  Future<void> editNote(String edit) async {
+   
     await db
         .collection("users")
         .doc(auth.currentUser!.uid)
         .collection("note")
-        .doc(noteId)
-        .delete()
-        .then((value) {
-      Get.snackbar("Note Deleted", "Note Deleted from Firestore",
-          backgroundColor: Colors.red);
-
-      getNote();
-    }).onError((error, stackTrace) {
-      Get.snackbar("Error", error.toString());
-    });
+        .doc(edit)
+        .update({"note": editnote.text});
+    editnote.clear();
+    getNote();
   }
-
 }
