@@ -15,7 +15,7 @@ class Signup extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.amber,
-          title: Text("Sign up"),
+          title: const Text("Sign up"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -24,37 +24,37 @@ class Signup extends StatelessWidget {
             children: [
               TextFormField(
                 controller: authController.userName,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "User Name",
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextFormField(
                 controller: authController.email,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Email",
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextFormField(
                 controller: authController.pass,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Password",
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextButton(
                 onPressed: () {
                   authController.signup();
-                  Get.to(Login());
+                  Get.to(() => const Login());
                 },
-                child: Text("Sign up"),
+                child: const Text("Sign up"),
               )
             ],
           ),

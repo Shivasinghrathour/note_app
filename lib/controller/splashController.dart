@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:note_app/pages/homepage.dart';
 import 'package:note_app/welcome.dart';
@@ -7,7 +6,6 @@ import 'package:note_app/welcome.dart';
 class SplashController extends GetxController {
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     Splashfunction();
   }
@@ -16,12 +14,12 @@ class SplashController extends GetxController {
 
   void Splashfunction() async {
     await Future.delayed(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
     );
     if (auth.currentUser == null) {
-      Get.to(Welcome());
+      Get.to(() => const Welcome());
     } else {
-      Get.to(HomePage());
+      Get.to(() => const HomePage());
     }
   }
 }

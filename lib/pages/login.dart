@@ -13,7 +13,7 @@ class Login extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.amber,
-          title: Text("Login"),
+          title: const Text("Login"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -22,28 +22,28 @@ class Login extends StatelessWidget {
             children: [
               TextFormField(
                 controller: authController.email,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Email",
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextFormField(
                 controller: authController.pass,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: "Password",
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               TextButton(
                   onPressed: () {
                     authController.login();
-                    Get.to(HomePage());
+                    Get.to(() => const HomePage());
                   },
-                  child: Text("Login"))
+                  child: const Text("Login"))
             ],
           ),
         ),
