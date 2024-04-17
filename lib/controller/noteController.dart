@@ -112,6 +112,7 @@ class NoteController extends GetxController {
       hasNote.value = noteList.isNotEmpty; // Update hasNote based on noteList
 
       noteList.refresh();
+      getNote();
     } catch (ex) {
       Get.snackbar("Error", ex.toString());
     }

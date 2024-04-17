@@ -3,5 +3,8 @@ class MyIcons {
 
   // svg icons for blank note
 
-  static const blakNoteIcon = "$iconPath/BlankNote.svg";
+  static const blank = "$iconPath/blank.png";
+  static const add = "$iconPath/add.svg";
+  static const search = "$iconPath/search.svg";
+  static const info = "$iconPath/info.svg";
 }

@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^4.19.1
   firebase_core: ^2.29.0
   cloud_firestore: ^4.16.1
+  flutter_svg: ^2.0.10+1
+  gettext: ^1.2.0
 
 dev_dependencies:
   flutter_test:
