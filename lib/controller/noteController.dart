@@ -12,7 +12,7 @@ class NoteController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-
+    hasNote.value = noteList.isNotEmpty;
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
         getNote();
@@ -27,11 +27,12 @@ class NoteController extends GetxController {
 
   final noteList = <NoteModel>[].obs;
 
+  RxBool hasNote = false.obs;
+
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
   AuthController authController = Get.put(AuthController());
-  NoteModel noteModel = Get.put(NoteModel());
-// dialog box
+
   void showAddNoteDialog() {
     Get.defaultDialog(
       title: "Add Note",
@@ -45,7 +46,6 @@ class NoteController extends GetxController {
       textCancel: "Cancel",
       confirmTextColor: Colors.white,
       onConfirm: () {
-        // Add your note here
         addNote();
         Get.back();
       },
@@ -55,7 +55,6 @@ class NoteController extends GetxController {
     );
   }
 
-// edit dialog box
   void showEditNoteDialog({required String docNoteID}) {
     Get.defaultDialog(
       title: "Edit Note",
@@ -69,9 +68,8 @@ class NoteController extends GetxController {
       textCancel: "Cancel",
       confirmTextColor: Colors.white,
       onConfirm: () {
-        // Add your note here
         Get.back();
-        editNote(noteDocID: docNoteID);
+        editNote(docNoteID);
       },
       onCancel: () {
         addnote.clear();
@@ -79,7 +77,6 @@ class NoteController extends GetxController {
     );
   }
 
-// add note function
   void addNote() async {
     var notemodel = NoteModel(
       note: addnote.text,
@@ -99,7 +96,6 @@ class NoteController extends GetxController {
         backgroundColor: Colors.green);
   }
 
-// get note function
   Future<void> getNote() async {
     try {
       var data = await db
@@ -113,13 +109,14 @@ class NoteController extends GetxController {
         noteList.add(NoteModel.fromJson(note.data()));
       }
 
+      hasNote.value = noteList.isNotEmpty; // Update hasNote based on noteList
+
       noteList.refresh();
     } catch (ex) {
       Get.snackbar("Error", ex.toString());
     }
   }
 
-// delete note function
   Future<void> deleteNote(String noteId) async {
     try {
       await db
@@ -139,8 +136,7 @@ class NoteController extends GetxController {
     }
   }
 
-// edit not function
-  Future<void> editNote({required String noteDocID}) async {
+  Future<void> editNote(String noteDocID) async {
     await db
         .collection("users")
         .doc(auth.currentUser!.uid)

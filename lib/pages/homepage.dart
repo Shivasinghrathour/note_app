@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/controller/noteController.dart';
-import 'package:note_app/model/model.dart';
+
 import 'package:note_app/welcome.dart';
+import 'package:note_app/widgets/blanknote.dart';
+import 'package:note_app/widgets/noteTile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -38,47 +40,9 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Obx(() => Column(
-              children: noteController.noteList
-                  .map(
-                    (e) => Container(
-                      decoration: BoxDecoration(
-                        color: Colors.yellow[50],
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: ListTile(
-                          leading: const Icon(Icons.check),
-                          title: Text(
-                            e.note.toString(),
-                            style: const TextStyle(fontSize: 22),
-                          ),
-                          trailing: SizedBox(
-                            width: 100,
-                            child: Row(
-                              children: [
-                                // edit icon
-                                IconButton(
-                                  onPressed: () {
-                                    noteController.showEditNoteDialog(
-                                        docNoteID: e.noteI.toString());
-                                  },
-                                  icon: const Icon(Icons.edit),
-                                ),
-                                // delete icon
-                                IconButton(
-                                  onPressed: () {
-                                    String noteIdToDelete = e.noteI.toString();
-
-                                    noteController.deleteNote(noteIdToDelete);
-                                  },
-                                  icon: const Icon(Icons.delete),
-                                ),
-                              ],
-                            ),
-                          )),
-                    ),
-                  )
-                  .toList()))
+          Obx(
+            () => noteController.hasNote.value ? NoteTile() : BlankNote(),
+          ),
         ],
       ),
     );
