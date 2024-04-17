@@ -10,15 +10,12 @@ class BlankNote extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Icon(
-              Icons.edit_calendar_rounded,
-              size: 250,
-            ),
+            child: Image.asset("assets/icons/image.png"),
           ),
           SizedBox(height: 50),
           Text(
             "Tap + to add note",
-            style: TextStyle(fontSize: 30),
+            style: Theme.of(context).textTheme.displayMedium,
           )
         ],
       ),
