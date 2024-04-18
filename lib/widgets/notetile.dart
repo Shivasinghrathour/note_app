@@ -22,10 +22,12 @@ class NoteTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             child: ListTile(
-              leading: const Icon(Icons.check),
-              title: Text(
-                note.note.toString(),
-                style: const TextStyle(fontSize: 22),
+              title: Padding(
+                padding: const EdgeInsets.all(500),
+                child: Text(
+                  note.note.toString(),
+                  style: const TextStyle(fontSize: 50),
+                ),
               ),
               trailing: SizedBox(
                 width: 100,

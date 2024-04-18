@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/controller/noteController.dart';
+import 'package:note_app/pages/editor/editor.dart';
 import 'package:note_app/widgets/blanknote.dart';
+import 'package:note_app/widgets/notesearchtile.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,6 +28,7 @@ class HomePage extends StatelessWidget {
               backgroundColor: Theme.of(context).colorScheme.background,
               onPressed: () {
                 noteController.showAddNoteDialog();
+                // Get.to(Editor());
               },
               child: Center(
                 child: SvgPicture.asset(
@@ -34,22 +37,25 @@ class HomePage extends StatelessWidget {
               )),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Obx(() => noteController.hasNote.value
-                  ? Padding(
-                      padding:
-                          const EdgeInsets.only(top: 40, left: 10, right: 10),
-                      child: Column(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
+            child: Column(
+              children: [
+                NoteSearchtile(),
+                const SizedBox(
+                  height: 15,
+                ),
+                Obx(() => noteController.hasNote.value
+                    ? Column(
                         children: List.generate(
                           noteController.noteList.length,
                           (i) {
                             final note = noteController.noteList[i];
-                            final Color backgroundColor =
-                                i % 2 == 0 ? Colors.white : Colors.yellowAccent;
+                            final Color backgroundColor = i % 2 == 0
+                                ? Theme.of(context).colorScheme.background
+                                : Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer;
 
                             return Container(
                               decoration: BoxDecoration(
@@ -92,10 +98,10 @@ class HomePage extends StatelessWidget {
                             );
                           },
                         ),
-                      ),
-                    )
-                  : BlankNote()),
-            ],
+                      )
+                    : BlankNote()),
+              ],
+            ),
           ),
         ),
       ),

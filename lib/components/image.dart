@@ -7,4 +7,9 @@ class MyIcons {
   static const add = "$iconPath/add.svg";
   static const search = "$iconPath/search.svg";
   static const info = "$iconPath/info.svg";
+  static const save = "$iconPath/save.svg";
+  static const back = "$iconPath/back.svg";
+  static const visibility = "$iconPath/visibility.svg";
+  static const close = "$iconPath/closes.svg";
+  static const nosearch = "$iconPath/nosearch.png";
 }

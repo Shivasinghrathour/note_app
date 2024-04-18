@@ -7,6 +7,7 @@ var darkTheme = ThemeData(
     background: bgColor,
     primary: textColor,
     onPrimaryContainer: ContainerColor,
+    onSecondary: label,
   ),
   // large font heading text
   textTheme: TextTheme(
@@ -15,7 +16,7 @@ var darkTheme = ThemeData(
       fontSize: 43,
       fontWeight: FontWeight.w600,
     ),
-    // medium fonts like note text 
+    // medium fonts like note text
     displayMedium: TextStyle(
       fontFamily: "Myfont",
       fontSize: 25,
@@ -27,5 +28,29 @@ var darkTheme = ThemeData(
       fontSize: 20,
       fontWeight: FontWeight.w300,
     ),
+    // for title label
+    labelLarge: TextStyle(
+        fontFamily: "Myfont",
+        fontSize: 43,
+        fontWeight: FontWeight.w600,
+        color: label),
+    // for description label
+    labelSmall: TextStyle(
+        fontFamily: "Myfont",
+        fontSize: 25,
+        fontWeight: FontWeight.w400,
+        color: label),
+    // for search label
+    labelMedium: TextStyle(
+        fontFamily: "Myfont",
+        fontSize: 20,
+        fontWeight: FontWeight.w300,
+        color: label),
+    // for search text
+    bodySmall: TextStyle(
+        fontFamily: "Myfont",
+        fontSize: 20,
+        fontWeight: FontWeight.w300,
+        color: textColor),
   ),
 );
