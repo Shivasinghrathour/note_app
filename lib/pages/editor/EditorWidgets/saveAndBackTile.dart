@@ -4,7 +4,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/saveanddelete.dart';
+import 'package:note_app/model/model.dart';
 import 'package:note_app/pages/editor/finalNote.dart';
+import 'package:note_app/pages/editor/priviewnote.dart';
 
 class SaveandBack extends StatelessWidget {
   const SaveandBack({super.key});
@@ -12,6 +14,7 @@ class SaveandBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SaveDelete saveDelete = Get.put(SaveDelete());
+    NoteModel noteModel = Get.put(NoteModel());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -57,8 +60,7 @@ class SaveandBack extends StatelessWidget {
                 child: IconButton(
                   onPressed: () {
                     Get.to(
-                      FinalNote(),
-                      transition: Transition.rightToLeft,
+                      PriviewNote(),
                     );
                   },
                   icon: SvgPicture.asset(

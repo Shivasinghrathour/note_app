@@ -6,9 +6,10 @@ import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/model/model.dart';
 import 'package:note_app/pages/editor/EditorWidgets/saveAndBackTile.dart';
 
-class FinalNote extends StatelessWidget {
-  final NoteModel note;
-  const FinalNote({super.key, required this.note});
+class PriviewNote extends StatelessWidget {
+  const PriviewNote({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +27,14 @@ class FinalNote extends StatelessWidget {
               SizedBox(height: Get.height * .04),
               Container(
                 child: Text(
-                  note.note.toString(),
+                  noteController.addnote.text,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
               SizedBox(height: Get.height * 0.06),
               Container(
                 child: Text(
-                  note.des.toString(),
+                  noteController.adddes.text,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
               )

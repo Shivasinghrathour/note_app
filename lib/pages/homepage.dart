@@ -5,6 +5,7 @@ import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/pages/editor/editor.dart';
+import 'package:note_app/pages/editor/finalNote.dart';
 import 'package:note_app/widgets/blanknote.dart';
 import 'package:note_app/widgets/notesearchtile.dart';
 
@@ -55,30 +56,35 @@ class HomePage extends StatelessWidget {
                                     .colorScheme
                                     .onPrimaryContainer;
 
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: backgroundColor,
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              child: ListTile(
-                                title: Padding(
-                                  padding: const EdgeInsets.all(20),
-                                  child: Text(
-                                    note.note.toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium,
-                                  ),
+                            return InkWell(
+                              onTap: () {
+                                Get.to(FinalNote(note: note));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: backgroundColor,
+                                  borderRadius: BorderRadius.circular(14),
                                 ),
-                                trailing: IconButton(
-                                  onPressed: () {
-                                    String noteIdToDelete =
-                                        note.noteI.toString();
-                                    noteController.deleteNote(noteIdToDelete);
-                                  },
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    size: 30,
+                                child: ListTile(
+                                  title: Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Text(
+                                      note.note.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium,
+                                    ),
+                                  ),
+                                  trailing: IconButton(
+                                    onPressed: () {
+                                      String noteIdToDelete =
+                                          note.noteI.toString();
+                                      noteController.deleteNote(noteIdToDelete);
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
                               ),

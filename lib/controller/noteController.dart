@@ -93,6 +93,8 @@ class NoteController extends GetxController {
         .set(notemodel.toJson());
 
     getNote();
+    addnote.clear();
+    adddes.clear();
 
     Get.snackbar("Note Added", "Note Added to Firestore",
         backgroundColor: Colors.green);
