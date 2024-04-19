@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
-import 'package:note_app/widgets/notesearchtile.dart';
 
 class BlankNote extends StatelessWidget {
   const BlankNote({super.key});

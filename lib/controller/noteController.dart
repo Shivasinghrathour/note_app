@@ -9,6 +9,7 @@ class NoteController extends GetxController {
   TextEditingController addnote = TextEditingController();
   TextEditingController adddes = TextEditingController();
   TextEditingController editnote = TextEditingController();
+  TextEditingController editdes = TextEditingController();
 
   @override
   Future<void> onInit() async {
@@ -33,50 +34,6 @@ class NoteController extends GetxController {
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
   AuthController authController = Get.put(AuthController());
-
-  void showAddNoteDialog() {
-    Get.defaultDialog(
-      title: "Add Note",
-      content: TextFormField(
-        controller: addnote,
-        decoration: const InputDecoration(
-          hintText: "Enter your note",
-        ),
-      ),
-      textConfirm: "Add",
-      textCancel: "Cancel",
-      confirmTextColor: Colors.white,
-      onConfirm: () {
-        addNote();
-        Get.back();
-      },
-      onCancel: () {
-        addnote.clear();
-      },
-    );
-  }
-
-  void showEditNoteDialog({required String docNoteID}) {
-    Get.defaultDialog(
-      title: "Edit Note",
-      content: TextFormField(
-        controller: editnote,
-        decoration: const InputDecoration(
-          hintText: "Edit your note",
-        ),
-      ),
-      textConfirm: "Edit",
-      textCancel: "Cancel",
-      confirmTextColor: Colors.white,
-      onConfirm: () {
-        Get.back();
-        editNote(docNoteID);
-      },
-      onCancel: () {
-        addnote.clear();
-      },
-    );
-  }
 
   void addNote() async {
     var notemodel = NoteModel(
@@ -147,8 +104,12 @@ class NoteController extends GetxController {
         .doc(auth.currentUser!.uid)
         .collection("note")
         .doc(noteDocID)
-        .update({"note": editnote.text});
+        .update({
+      "note": editnote.text,
+      "des": editdes.text,
+    });
     editnote.clear();
+    editdes.clear();
     getNote();
   }
 }

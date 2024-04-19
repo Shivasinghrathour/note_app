@@ -51,10 +51,10 @@ class HomePage extends StatelessWidget {
                           (i) {
                             final note = noteController.noteList[i];
                             final Color backgroundColor = i % 2 == 0
-                                ? Theme.of(context).colorScheme.background
-                                : Theme.of(context)
+                                ? Theme.of(context)
                                     .colorScheme
-                                    .onPrimaryContainer;
+                                    .onPrimaryContainer
+                                : Theme.of(context).colorScheme.background;
 
                             return InkWell(
                               onTap: () {
