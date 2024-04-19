@@ -3,9 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/color.dart';
 import 'package:note_app/components/image.dart';
+import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/pages/homepage.dart';
 
 class SaveDelete extends GetxController {
+  NoteController noteController = Get.put(NoteController());
   void saveDelete() {
     Get.defaultDialog(
       content: Column(
@@ -50,6 +52,7 @@ class SaveDelete extends GetxController {
               // save button
               InkWell(
                 onTap: () {
+                  noteController.addNote();
                   Get.to(HomePage());
                 },
                 child: Container(

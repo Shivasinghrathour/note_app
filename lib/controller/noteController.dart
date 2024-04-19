@@ -7,6 +7,7 @@ import 'package:note_app/model/model.dart';
 
 class NoteController extends GetxController {
   TextEditingController addnote = TextEditingController();
+  TextEditingController adddes = TextEditingController();
   TextEditingController editnote = TextEditingController();
 
   @override
@@ -80,6 +81,7 @@ class NoteController extends GetxController {
   void addNote() async {
     var notemodel = NoteModel(
       note: addnote.text,
+      des: adddes.text,
       userName: authController.userName.text,
       noteI: DateTime.now().millisecondsSinceEpoch.toString(),
     );

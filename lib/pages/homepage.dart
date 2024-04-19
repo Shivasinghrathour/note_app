@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
@@ -27,8 +25,8 @@ class HomePage extends StatelessWidget {
               elevation: 5,
               backgroundColor: Theme.of(context).colorScheme.background,
               onPressed: () {
-                noteController.showAddNoteDialog();
-                // Get.to(Editor());
+                // noteController.showAddNoteDialog();
+                Get.to(Editor());
               },
               child: Center(
                 child: SvgPicture.asset(
@@ -63,35 +61,24 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(14),
                               ),
                               child: ListTile(
-                                leading: const Icon(Icons.check),
-                                title: Text(
-                                  note.note.toString(),
-                                  style: const TextStyle(fontSize: 22),
+                                title: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Text(
+                                    note.note.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium,
+                                  ),
                                 ),
-                                trailing: SizedBox(
-                                  width: 100,
-                                  child: Row(
-                                    children: [
-                                      // edit icon
-                                      IconButton(
-                                        onPressed: () {
-                                          noteController.showEditNoteDialog(
-                                            docNoteID: note.noteI.toString(),
-                                          );
-                                        },
-                                        icon: const Icon(Icons.edit),
-                                      ),
-                                      // delete icon
-                                      IconButton(
-                                        onPressed: () {
-                                          String noteIdToDelete =
-                                              note.noteI.toString();
-                                          noteController
-                                              .deleteNote(noteIdToDelete);
-                                        },
-                                        icon: const Icon(Icons.delete),
-                                      ),
-                                    ],
+                                trailing: IconButton(
+                                  onPressed: () {
+                                    String noteIdToDelete =
+                                        note.noteI.toString();
+                                    noteController.deleteNote(noteIdToDelete);
+                                  },
+                                  icon: const Icon(
+                                    Icons.delete,
+                                    size: 30,
                                   ),
                                 ),
                               ),
