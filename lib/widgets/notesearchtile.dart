@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/pages/search/searchpage.dart';
+import 'package:note_app/pages/userprofile.dart';
 
 class NoteSearchtile extends StatelessWidget {
   const NoteSearchtile({super.key});
@@ -34,9 +35,7 @@ class NoteSearchtile extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
             Container(
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -44,11 +43,13 @@ class NoteSearchtile extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(2),
                 child: IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    MyIcons.info,
-                  ),
-                ),
+                    onPressed: () {
+                      Get.to(UserProfile());
+                    },
+                    icon: const Icon(
+                      Icons.apps_outlined,
+                      size: 30,
+                    )),
               ),
             ),
           ],

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
@@ -31,7 +29,7 @@ class SearchPage extends StatelessWidget {
                   ),
                 ),
                 hintText: "Search by the keyword...",
-                contentPadding: EdgeInsets.only(left: 35, top: 35),
+                contentPadding: const EdgeInsets.only(left: 35, top: 35),
                 hintStyle: Theme.of(context).textTheme.labelMedium,
                 fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
                 filled: true,

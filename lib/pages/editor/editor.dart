@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/pages/editor/EditorWidgets/saveAndBackTile.dart';
@@ -17,7 +15,7 @@ class Editor extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SaveandBack(),
+              const SaveandBack(),
               SizedBox(height: Get.height * .035),
               TextFormField(
                 controller: noteController.addnote,

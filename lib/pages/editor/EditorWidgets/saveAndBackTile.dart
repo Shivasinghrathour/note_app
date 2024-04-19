@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/saveanddelete.dart';
-import 'package:note_app/model/model.dart';
-import 'package:note_app/pages/editor/finalNote.dart';
 import 'package:note_app/pages/editor/priviewnote.dart';
 
 class SaveandBack extends StatelessWidget {
@@ -14,7 +11,6 @@ class SaveandBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SaveDelete saveDelete = Get.put(SaveDelete());
-    NoteModel noteModel = Get.put(NoteModel());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -50,7 +46,7 @@ class SaveandBack extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             Container(
               decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,

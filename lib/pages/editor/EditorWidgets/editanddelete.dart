@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/noteController.dart';
-import 'package:note_app/controller/saveanddelete.dart';
 import 'package:note_app/model/model.dart';
 import 'package:note_app/pages/editor/EditorWidgets/editnotepage.dart';
 import 'package:note_app/pages/homepage.dart';
@@ -49,8 +48,8 @@ class EditandDelete extends StatelessWidget {
                     note: note,
                   ));
                 },
-                icon: Padding(
-                    padding: const EdgeInsets.all(2),
+                icon: const Padding(
+                    padding: EdgeInsets.all(2),
                     child: Icon(
                       Icons.edit_note_outlined,
                       size: 30,
@@ -66,7 +65,7 @@ class EditandDelete extends StatelessWidget {
                 onPressed: () {
                   String noteIdToDelete = note.noteI.toString();
                   noteController.deleteNote(noteIdToDelete);
-                  Get.to(HomePage());
+                  Get.to(const HomePage());
                 },
                 icon: const Padding(
                     padding: EdgeInsets.all(2),

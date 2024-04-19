@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
-import 'package:note_app/controller/authController.dart';
 import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/pages/editor/editor.dart';
 import 'package:note_app/pages/editor/finalNote.dart';
@@ -14,7 +13,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
     NoteController noteController = Get.put(NoteController());
     return SafeArea(
       child: Scaffold(
@@ -26,7 +24,6 @@ class HomePage extends StatelessWidget {
               elevation: 5,
               backgroundColor: Theme.of(context).colorScheme.background,
               onPressed: () {
-                // noteController.showAddNoteDialog();
                 Get.to(Editor());
               },
               child: Center(
@@ -81,7 +78,7 @@ class HomePage extends StatelessWidget {
                           },
                         ),
                       )
-                    : BlankNote()),
+                    : const BlankNote()),
               ],
             ),
           ),

@@ -34,14 +34,7 @@ class NoteTile extends StatelessWidget {
                 child: Row(
                   children: [
                     // edit icon
-                    IconButton(
-                      onPressed: () {
-                        noteController.showEditNoteDialog(
-                          docNoteID: note.noteI.toString(),
-                        );
-                      },
-                      icon: const Icon(Icons.edit),
-                    ),
+
                     // delete icon
                     IconButton(
                       onPressed: () {

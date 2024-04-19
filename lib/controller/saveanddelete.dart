@@ -60,10 +60,10 @@ class SaveDelete extends GetxController {
                     borderRadius: BorderRadius.circular(50),
                     border: Border.all(color: bgColor, width: 5),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 25),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                       child: Text("Save",
                           style: TextStyle(
                             fontFamily: "Myfont",

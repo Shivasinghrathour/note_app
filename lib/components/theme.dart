@@ -3,14 +3,14 @@ import 'package:note_app/components/color.dart';
 
 var darkTheme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.dark(
+  colorScheme: const ColorScheme.dark(
     background: bgColor,
     primary: textColor,
-    onPrimaryContainer: ContainerColor,
+    onPrimaryContainer: containerColor,
     onSecondary: label,
   ),
   // large font heading text
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     displayLarge: TextStyle(
       fontFamily: "Myfont",
       fontSize: 43,
