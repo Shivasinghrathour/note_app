@@ -6,8 +6,8 @@ import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/model/model.dart';
 import 'package:note_app/pages/editor/EditorWidgets/saveAndBackTile.dart';
 
-class PriviewNote extends StatelessWidget {
-  const PriviewNote({
+class PreviewNote extends StatelessWidget {
+  const PreviewNote({
     super.key,
   });
 

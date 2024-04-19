@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:note_app/controller/noteController.dart';
 import 'package:note_app/model/model.dart';
+import 'package:note_app/pages/editor/EditorWidgets/editanddelete.dart';
 import 'package:note_app/pages/editor/EditorWidgets/saveAndBackTile.dart';
 
 class FinalNote extends StatelessWidget {
@@ -22,7 +23,9 @@ class FinalNote extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SaveandBack(),
+              EditandDelete(
+                note: note,
+              ),
               SizedBox(height: Get.height * .04),
               Container(
                 child: Text(

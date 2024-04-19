@@ -75,17 +75,6 @@ class HomePage extends StatelessWidget {
                                           .displayMedium,
                                     ),
                                   ),
-                                  trailing: IconButton(
-                                    onPressed: () {
-                                      String noteIdToDelete =
-                                          note.noteI.toString();
-                                      noteController.deleteNote(noteIdToDelete);
-                                    },
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      size: 30,
-                                    ),
-                                  ),
                                 ),
                               ),
                             );

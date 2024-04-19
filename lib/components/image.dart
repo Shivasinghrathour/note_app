@@ -11,5 +11,7 @@ class MyIcons {
   static const back = "$iconPath/back.svg";
   static const visibility = "$iconPath/visibility.svg";
   static const close = "$iconPath/closes.svg";
+  static const edit = "$iconPath/edit.svg";
+  static const bin = "$iconPath/bin.svg";
   static const nosearch = "$iconPath/nosearch.png";
 }
