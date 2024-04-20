@@ -52,7 +52,6 @@ class UserProfile extends StatelessWidget {
             SizedBox(height: 80),
             Button(
               btnName: "Logout",
-              btnicon: Icons.logout_outlined,
               ontap: () {
                 authController.logout();
                 Get.offAll(Welcome());

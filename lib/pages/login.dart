@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/authController.dart';
 import 'package:note_app/pages/homepage.dart';
+import 'package:note_app/pages/userprofile/widgets/button.dart';
+import 'package:note_app/pages/userprofile/widgets/mytextfield.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -14,7 +16,7 @@ class Login extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
-        child: Column(
+        child: ListView(
           children: [
             SizedBox(height: Get.height * 0.15),
             Text(
@@ -22,28 +24,45 @@ class Login extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            SizedBox(
-              height: Get.height * 0.025,
+            Divider(
+              height: Get.height * 0.04,
+              thickness: 4,
+              indent: 40,
+              endIndent: 40,
             ),
-            
-            const SizedBox(
-              height: 25,
+            SizedBox(height: Get.height * 0.07),
+            MYTDC(
+              inputAction: TextInputAction.next,
+              controller: authController.email,
+              hint: "Email",
+              icon: Icons.email_outlined,
             ),
-            TextFormField(
+            SizedBox(height: Get.height * 0.03),
+            // password field
+            MYTDC(
+              inputAction: TextInputAction.go,
               controller: authController.pass,
-              decoration: const InputDecoration(
-                hintText: "Password",
-              ),
+              hint: "Password",
+              icon: Icons.lock_open_outlined,
             ),
-            const SizedBox(
-              height: 25,
+            SizedBox(height: Get.height * 0.055),
+            Button(
+              btnName: "Login",
+              ontap: () {
+                authController.login();
+                Get.to(() => const HomePage());
+              },
             ),
-            TextButton(
-                onPressed: () {
-                  authController.login();
-                  Get.to(() => const HomePage());
-                },
-                child: const Text("Login"))
+            SizedBox(height: 40),
+            Row(
+              children: [
+                Text("Forget Password"),
+                InkWell(
+                  onTap: () {},
+                  child: Text("data"),
+                ),
+              ],
+            )
           ],
         ),
       ),
