@@ -34,6 +34,7 @@ class NoteController extends GetxController {
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
   AuthController authController = Get.put(AuthController());
+  NoteModel noteModel = Get.put(NoteModel());
 
   void addNote() async {
     var notemodel = NoteModel(
@@ -73,7 +74,6 @@ class NoteController extends GetxController {
       hasNote.value = noteList.isNotEmpty; // Update hasNote based on noteList
 
       noteList.refresh();
-      getNote();
     } catch (ex) {
       Get.snackbar("Error", ex.toString());
     }

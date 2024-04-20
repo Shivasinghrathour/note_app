@@ -11,6 +11,12 @@ var darkTheme = ThemeData(
   ),
   // large font heading text
   textTheme: const TextTheme(
+    // for title
+    titleLarge: TextStyle(
+        fontFamily: "Myfont",
+        fontSize: 45,
+        fontWeight: FontWeight.w600,
+        wordSpacing: 2),
     displayLarge: TextStyle(
       fontFamily: "Myfont",
       fontSize: 43,
