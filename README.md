@@ -41,9 +41,6 @@ This is a simple Flutter application for managing notes. Users can create an acc
 6. Run the application:
     ```bash
    flutter run
-
-
-
 ## Directory Structure
    1. lib/: Contains the Dart source code for the application.
    2. controller/: Contains controllers for managing state and logic.
