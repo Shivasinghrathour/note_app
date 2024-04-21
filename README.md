@@ -40,10 +40,3 @@ Create a new Firebase project on the Firebase Console. Add an Android app to you
 5. Run the application:
     ```bash
    flutter run
-
-
-   
-
-
-   
-
