@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/authController.dart';
@@ -20,9 +21,27 @@ class UserProfile extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 100, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 60, left: 20, right: 20),
         child: Column(
           children: [
+            Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: SvgPicture.asset(
+                        MyIcons.back,
+                        width: 38,
+                      )),
+                ),
+              ],
+            ),
             Center(
               child: CircleAvatar(
                 radius: 80,

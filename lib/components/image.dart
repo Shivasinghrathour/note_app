@@ -14,4 +14,5 @@ class MyIcons {
   static const edit = "$iconPath/edit.svg";
   static const bin = "$iconPath/bin.svg";
   static const nosearch = "$iconPath/nosearch.png";
+  static const logo = "$iconPath/logo.png";
 }
