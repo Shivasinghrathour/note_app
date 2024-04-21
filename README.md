@@ -44,6 +44,7 @@ This is a simple Flutter application for managing notes. Users can create an acc
 
 ## Screenshots
 Include screenshots of your application here.
+   ![Screenshot 1](editortab.png)
 
 ## Directory Structure
    1. lib/: Contains the Dart source code for the application.
