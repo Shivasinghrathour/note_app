@@ -29,10 +29,18 @@ This is a simple Flutter application for managing notes. Users can create an acc
    
    cd flutter- note_app
 
-4. Install dependencies:
-5. Set up Firebase for your project:
+3. Install dependencies:
+   ```bash
+   
+   flutter pub get
+
+4. Set up Firebase for your project:
 Create a new Firebase project on the Firebase Console. Add an Android app to your Firebase project and follow the setup instructions to add the google-services.json file to your Flutter project. Add an iOS app to your Firebase project and follow the setup instructions to add the GoogleService-Info.plist file to your Flutter project. Enable Firebase Authentication and Cloud Firestore for your project.
-6. Run the application:
+
+5. Run the application:
+    ```bash
+   flutter run
+
 
    
 
