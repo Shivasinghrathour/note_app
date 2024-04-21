@@ -44,6 +44,7 @@ This is a simple Flutter application for managing notes. Users can create an acc
 
 ## Screenshots
 Include screenshots of your application here.
+  ```markdown
    ![Screenshot 1](assets/screenshots/editortab.png)
 
 ## Directory Structure
