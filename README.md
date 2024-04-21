@@ -19,6 +19,7 @@ This is a simple Flutter application for managing notes. Users can create an acc
 
 1. Clone the repository to your local machine:
 
-   ```bash    
-   git clone https://github.com/your-username/flutter-note-app.git
+   ```bash
+   
+   git clone https://github.com/Shivasinghrathour/note_app.git
 
