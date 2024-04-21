@@ -42,12 +42,7 @@ This is a simple Flutter application for managing notes. Users can create an acc
     ```bash
    flutter run
 
-## Screenshots
-Include screenshots of your application here.
 
-   ![Login Screen](screenshot/loginpage.png)
-   ![Add Note Screen](assets/screenshots/loginpage.png)
-   ![View Notes Screen](screenshots/view_notes_screen.png)
 
 ## Directory Structure
    1. lib/: Contains the Dart source code for the application.
