@@ -53,7 +53,6 @@ class NoteController extends GetxController {
           .set(
             notemodel.toJson(),
           );
-
       getNote();
       addnote.clear();
       adddes.clear();
@@ -77,9 +76,6 @@ class NoteController extends GetxController {
         for (var note in data.docs) {
           noteList.add(NoteModel.fromJson(note.data()));
         }
-
-        // Update hasNote based on noteList
-
         noteList.refresh();
       }
     } catch (ex) {
