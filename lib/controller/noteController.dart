@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:note_app/model/model.dart';
+import 'package:uuid/uuid.dart';
 
 class NoteController extends GetxController {
   TextEditingController addnote = TextEditingController();
@@ -29,20 +30,25 @@ class NoteController extends GetxController {
   NoteModel noteModel = Get.put(NoteModel());
 
   void addNote() async {
+    // Generate a v4 (random) id
+    const Uuid uuid = Uuid();
+
+    // Get current user
     var currentUser = auth.currentUser;
+
+    // Check if user is not null
     if (currentUser != null) {
       var notemodel = NoteModel(
         note: addnote.text,
         des: adddes.text,
+        id: uuid.v4(),
       );
       await db
           .collection("users")
           .doc(currentUser.uid)
           .collection("note")
-          .doc(currentUser.uid)
-          .set(
-            notemodel.toJson(),
-          );
+          .doc(notemodel.id)
+          .set(notemodel.toJson());
 
       getNote();
       addnote.clear();
@@ -88,7 +94,7 @@ class NoteController extends GetxController {
             .collection("users")
             .doc(currentUser.uid)
             .collection("note")
-            .doc(currentUser.uid)
+            .doc(noteId)
             .delete()
             .then((value) => {
                   Get.snackbar("Note Deleted",

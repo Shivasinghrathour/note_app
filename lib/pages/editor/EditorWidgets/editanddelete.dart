@@ -63,8 +63,7 @@ class EditandDelete extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15)),
               child: IconButton(
                 onPressed: () {
-                  noteController
-                      .deleteNote(noteController.auth.currentUser!.uid);
+                  noteController.deleteNote(note.id.toString());
                   Get.to(const HomePage());
                 },
                 icon: const Padding(

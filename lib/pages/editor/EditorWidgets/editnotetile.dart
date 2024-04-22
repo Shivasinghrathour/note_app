@@ -42,8 +42,7 @@ class EditnoteTile extends StatelessWidget {
                 padding: const EdgeInsets.all(2),
                 child: IconButton(
                     onPressed: () {
-                      noteController
-                          .editNote(noteController.auth.currentUser!.uid);
+                      noteController.editNote(note.id.toString());
                       Get.off(const HomePage());
                     },
                     icon: const Icon(Icons.edit_calendar_outlined)),

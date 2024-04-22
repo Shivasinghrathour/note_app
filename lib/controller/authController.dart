@@ -73,8 +73,6 @@ class AuthController extends GetxController {
         firestore
             .collection("users")
             .doc(auth.currentUser!.uid)
-            .collection("note")
-            .doc(auth.currentUser!.uid)
             .set(userModel.value!.toJson());
       } else {
         return;
@@ -91,12 +89,8 @@ class AuthController extends GetxController {
 
       // Check if the user is not nullou
       if (user != null && user.uid.isNotEmpty) {
-        final collectionRef = await firestore
-            .collection("users")
-            .doc(user.uid)
-            .collection("note")
-            .doc(user.uid)
-            .get();
+        final collectionRef =
+            await firestore.collection("users").doc(user.uid).get();
 
         // If the user is not null, we will get the user data
         final data = collectionRef.data();
