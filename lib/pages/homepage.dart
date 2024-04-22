@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Obx(() => noteController.hasNote.value
+                Obx(() => noteController.noteList.isNotEmpty
                     ? Column(
                         children: List.generate(
                           noteController.noteList.length,

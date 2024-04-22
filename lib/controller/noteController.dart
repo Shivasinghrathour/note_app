@@ -6,17 +6,17 @@ import 'package:note_app/controller/authController.dart';
 import 'package:note_app/model/model.dart';
 
 class NoteController extends GetxController {
-  // add note controller 
+  // add note controller
   TextEditingController addnote = TextEditingController();
   TextEditingController adddes = TextEditingController();
-  // edit note controller 
+  // edit note controller
   TextEditingController editnote = TextEditingController();
   TextEditingController editdes = TextEditingController();
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    hasNote.value = noteList.isNotEmpty;
+    // hasNote.value = noteList.isNotEmpty;
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
         getNote();
@@ -31,7 +31,7 @@ class NoteController extends GetxController {
 
   final noteList = <NoteModel>[].obs;
 
-  RxBool hasNote = false.obs;
+  // RxBool hasNote = false.obs;
 
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
@@ -80,8 +80,8 @@ class NoteController extends GetxController {
           noteList.add(NoteModel.fromJson(note.data()));
         }
 
-        // hasNote.value = noteList.isNotEmpty; 
-        
+        // hasNote.value = noteList.isNotEmpty;
+
         // Update hasNote based on noteList
 
         noteList.refresh();
