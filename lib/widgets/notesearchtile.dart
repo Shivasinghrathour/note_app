@@ -12,7 +12,7 @@ class NoteSearchtile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NoteModel noteModel = Get.put(NoteModel());
+    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

@@ -5,17 +5,20 @@ class MYTDC extends StatelessWidget {
   final String hint;
   final IconData icon;
   final TextInputAction inputAction;
+  final bool obscue;
   const MYTDC({
     super.key,
     required this.controller,
     required this.hint,
     required this.icon,
     required this.inputAction,
+    required this.obscue,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscue,
       textInputAction: inputAction,
       controller: controller,
       style: Theme.of(context).textTheme.displaySmall,
