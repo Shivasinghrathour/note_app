@@ -80,7 +80,7 @@ class NoteController extends GetxController {
           noteList.add(NoteModel.fromJson(note.data()));
         }
 
-        hasNote.value = noteList.isNotEmpty; 
+        // hasNote.value = noteList.isNotEmpty; 
         
         // Update hasNote based on noteList
 
