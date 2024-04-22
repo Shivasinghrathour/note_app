@@ -75,6 +75,8 @@ class AuthController extends GetxController {
             .doc(auth.currentUser!.uid)
             .set(userModel.value!.toJson());
       } else {
+        print("user not found");
+
         return;
       }
     } catch (e) {
