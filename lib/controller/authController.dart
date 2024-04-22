@@ -63,6 +63,7 @@ class AuthController extends GetxController {
   Future<void> storeUserName() async {
     try {
       if (auth.currentUser != null && auth.currentUser!.uid.isNotEmpty) {
+        // Store the user data in the userModel
         userModel.value = UserModel(
           userName: userName.text,
           email: email.text,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:note_app/controller/authController.dart';
 import 'package:note_app/model/model.dart';
 
 class NoteController extends GetxController {
@@ -14,9 +13,8 @@ class NoteController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    hasNote.value = noteList.isNotEmpty;
     FirebaseAuth.instance.authStateChanges().listen((user) async {
-      if (user != null) {
+      if (user != null && user.uid.isNotEmpty) {
         await getNote();
       } else {
         noteList.clear();
@@ -25,8 +23,6 @@ class NoteController extends GetxController {
   }
 
   final noteList = <NoteModel>[].obs;
-
-  RxBool hasNote = false.obs;
 
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
@@ -38,7 +34,6 @@ class NoteController extends GetxController {
       var notemodel = NoteModel(
         note: addnote.text,
         des: adddes.text,
-        noteI: DateTime.now().millisecondsSinceEpoch.toString(),
       );
       await db
           .collection("users")
@@ -70,12 +65,15 @@ class NoteController extends GetxController {
         noteList.clear();
 
         for (var note in data.docs) {
-          noteList.add(NoteModel.fromJson(note.data()));
+          // Check if "note" filed exists in the document
+          if (note.data().containsKey("note")) {
+            noteList.add(NoteModel.fromJson(note.data()));
+          }
         }
 
-        hasNote.value = noteList.isNotEmpty; // Update hasNote based on noteList
-
         noteList.refresh();
+      } else {
+        noteList.clear();
       }
     } catch (ex) {
       Get.snackbar("Error", ex.toString());
