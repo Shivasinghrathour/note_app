@@ -14,7 +14,7 @@ class EditnoteTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     NoteController noteController = Get.put(NoteController());
-  
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -42,11 +42,11 @@ class EditnoteTile extends StatelessWidget {
                 padding: const EdgeInsets.all(2),
                 child: IconButton(
                     onPressed: () {
-                      String noteDocID = note.noteI.toString();
-                      noteController.editNote(noteDocID);
+                      noteController
+                          .editNote(noteController.auth.currentUser!.uid);
                       Get.off(const HomePage());
                     },
-                    icon:const Icon(Icons.edit_calendar_outlined)),
+                    icon: const Icon(Icons.edit_calendar_outlined)),
               ),
             ),
             const SizedBox(width: 15),

@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:note_app/components/image.dart';
 import 'package:note_app/controller/authController.dart';
-import 'package:note_app/model/model.dart';
 
 import 'package:note_app/pages/userprofile/widgets/button.dart';
 import 'package:note_app/pages/userprofile/widgets/namesection.dart';
@@ -21,7 +20,7 @@ class UserProfile extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
         child: Column(
           children: [
             Row(
@@ -42,7 +41,7 @@ class UserProfile extends StatelessWidget {
                 ),
               ],
             ),
-            Center(
+            const Center(
               child: CircleAvatar(
                 radius: 80,
                 backgroundImage: AssetImage(MyIcons.nosearch),
@@ -51,30 +50,31 @@ class UserProfile extends StatelessWidget {
 
               // name section
             ),
-            NameSection(itme: "Name"),
-            NameSectionBox(
-              icon: Icons.account_box_outlined,
-              item: "authController.userName.text",
+            const NameSection(itme: "Name"),
+            Obx(
+              () => NameSectionBox(
+                icon: Icons.account_box_outlined,
+                item: authController.userModel.value?.userName ?? "No UserName",
+              ),
             ),
-            SizedBox(height: 15),
-            NameSection(itme: "Password"),
+            const SizedBox(height: 15),
+            const NameSection(itme: "Password"),
             NameSectionBox(
               icon: Icons.lock_clock_outlined,
               item: authController.userName.text,
             ),
-            SizedBox(height: 15),
-            NameSection(itme: "Date of Birth"),
+            const SizedBox(height: 15),
+            const NameSection(itme: "Date of Birth"),
             NameSectionBox(
               icon: Icons.date_range_outlined,
               item: authController.pass.text,
             ),
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
             Button(
               btnName: "Logout",
               ontap: () {
                 authController.logout();
-                Get.offAll(Welcome());
-                print("logout");
+                Get.offAll(() => const Welcome());
               },
             )
           ],
