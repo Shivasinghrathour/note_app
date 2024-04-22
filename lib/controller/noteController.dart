@@ -6,8 +6,10 @@ import 'package:note_app/controller/authController.dart';
 import 'package:note_app/model/model.dart';
 
 class NoteController extends GetxController {
+  // add note controller 
   TextEditingController addnote = TextEditingController();
   TextEditingController adddes = TextEditingController();
+  // edit note controller 
   TextEditingController editnote = TextEditingController();
   TextEditingController editdes = TextEditingController();
 
@@ -78,7 +80,9 @@ class NoteController extends GetxController {
           noteList.add(NoteModel.fromJson(note.data()));
         }
 
-        hasNote.value = noteList.isNotEmpty; // Update hasNote based on noteList
+        hasNote.value = noteList.isNotEmpty; 
+        
+        // Update hasNote based on noteList
 
         noteList.refresh();
       }
