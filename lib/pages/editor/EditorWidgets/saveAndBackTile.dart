@@ -56,7 +56,7 @@ class SaveandBack extends StatelessWidget {
                 child: IconButton(
                   onPressed: () {
                     Get.to(
-                      PreviewNote(),
+                      const PreviewNote(),
                     );
                   },
                   icon: SvgPicture.asset(
