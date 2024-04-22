@@ -16,7 +16,7 @@ class NoteController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    // hasNote.value = noteList.isNotEmpty;
+
     FirebaseAuth.instance.authStateChanges().listen((user) {
       if (user != null) {
         getNote();
@@ -30,8 +30,6 @@ class NoteController extends GetxController {
   }
 
   final noteList = <NoteModel>[].obs;
-
-  // RxBool hasNote = false.obs;
 
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
@@ -79,8 +77,6 @@ class NoteController extends GetxController {
         for (var note in data.docs) {
           noteList.add(NoteModel.fromJson(note.data()));
         }
-
-        // hasNote.value = noteList.isNotEmpty;
 
         // Update hasNote based on noteList
 
