@@ -112,4 +112,13 @@ class NoteController extends GetxController {
     editdes.clear();
     getNote();
   }
+
+  @override
+  void onClose() {
+    addnote.dispose();
+    adddes.dispose();
+    editnote.dispose();
+    editdes.dispose();
+    super.onClose();
+  }
 }
