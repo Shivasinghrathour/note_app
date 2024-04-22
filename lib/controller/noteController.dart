@@ -40,7 +40,7 @@ class NoteController extends GetxController {
           .doc(currentUser.uid)
           .collection("note")
           .doc(currentUser.uid)
-          .set(
+          .update(
             notemodel.toJson(),
           );
 
