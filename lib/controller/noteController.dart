@@ -15,16 +15,13 @@ class NoteController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     hasNote.value = noteList.isNotEmpty;
-    FirebaseAuth.instance.authStateChanges().listen((user) {
+    FirebaseAuth.instance.authStateChanges().listen((user) async {
       if (user != null) {
-        getNote();
+        await getNote();
       } else {
         noteList.clear();
       }
     });
-    if (auth.currentUser != null) {
-      await getNote();
-    }
   }
 
   final noteList = <NoteModel>[].obs;
@@ -33,7 +30,6 @@ class NoteController extends GetxController {
 
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
-  AuthController authController = Get.put(AuthController());
   NoteModel noteModel = Get.put(NoteModel());
 
   void addNote() async {
@@ -42,14 +38,13 @@ class NoteController extends GetxController {
       var notemodel = NoteModel(
         note: addnote.text,
         des: adddes.text,
-        userName: authController.userName.text,
         noteI: DateTime.now().millisecondsSinceEpoch.toString(),
       );
       await db
           .collection("users")
           .doc(currentUser.uid)
           .collection("note")
-          .doc(notemodel.noteI)
+          .doc(currentUser.uid)
           .set(
             notemodel.toJson(),
           );
@@ -66,7 +61,7 @@ class NoteController extends GetxController {
   Future<void> getNote() async {
     try {
       var currentUser = auth.currentUser;
-      if (currentUser != null) {
+      if (currentUser != null && currentUser.uid.isNotEmpty) {
         var data = await db
             .collection("users")
             .doc(currentUser.uid)
@@ -95,7 +90,7 @@ class NoteController extends GetxController {
             .collection("users")
             .doc(currentUser.uid)
             .collection("note")
-            .doc(noteId)
+            .doc(currentUser.uid)
             .delete()
             .then((value) => {
                   Get.snackbar("Note Deleted",

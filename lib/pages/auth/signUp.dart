@@ -83,9 +83,8 @@ class Signup extends StatelessWidget {
 
               Button(
                 btnName: "Sign up",
-                ontap: () {
-                  authController.signup();
-                  Get.to(() => const Login());
+                ontap: () async {
+                  await authController.signup();
                 },
               ),
               SizedBox(height: Get.height * .1),

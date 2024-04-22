@@ -20,11 +20,11 @@ class HomePage extends StatelessWidget {
           height: 75,
           width: 80,
           child: FloatingActionButton(
-              shape: CircleBorder(),
+              shape: const CircleBorder(),
               elevation: 5,
               backgroundColor: Theme.of(context).colorScheme.background,
               onPressed: () {
-                Get.to(Editor());
+                Get.to(const Editor());
               },
               child: Center(
                 child: SvgPicture.asset(
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 60, left: 10, right: 10),
             child: Column(
               children: [
-                NoteSearchtile(),
+                const NoteSearchtile(),
                 const SizedBox(
                   height: 15,
                 ),

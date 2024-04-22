@@ -51,9 +51,11 @@ class UserProfile extends StatelessWidget {
               // name section
             ),
             const NameSection(itme: "Name"),
-            NameSectionBox(
-              icon: Icons.account_box_outlined,
-              item: authController.userName.text,
+            Obx(
+              () => NameSectionBox(
+                icon: Icons.account_box_outlined,
+                item: authController.userModel.value?.userName ?? "No UserName",
+              ),
             ),
             const SizedBox(height: 15),
             const NameSection(itme: "Password"),
@@ -72,8 +74,7 @@ class UserProfile extends StatelessWidget {
               btnName: "Logout",
               ontap: () {
                 authController.logout();
-                Get.offAll(const Welcome());
-                print("logout");
+                Get.offAll(() => const Welcome());
               },
             )
           ],

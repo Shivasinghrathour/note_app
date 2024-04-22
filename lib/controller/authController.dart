@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:note_app/model/model.dart';
 import 'package:note_app/model/user_model.dart';
+import 'package:note_app/pages/homepage.dart';
 
 class AuthController extends GetxController {
   final auth = FirebaseAuth.instance;
@@ -13,21 +13,29 @@ class AuthController extends GetxController {
   TextEditingController pass = TextEditingController();
   TextEditingController userName = TextEditingController();
 
-  // This is the user model that will be updated based on the user's state
-  final Rx<UserModel?> userModel = Rx<UserModel?>(null);
+  Rx<UserModel?> userModel = UserModel().obs;
 
   // signup Functuion
+  Future<void> signup() async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+        email: email.text,
+        password: pass.text,
+      );
 
-  void signup() async {
-    auth.createUserWithEmailAndPassword(
-      email: email.text,
-      password: pass.text,
-    );
-    Get.snackbar(
-      "Account Created",
-      "Plese Login to Continue",
-      backgroundColor: Colors.green,
-    );
+      // Store the user name
+      await storeUserName();
+
+      Get.snackbar(
+        "Account Created",
+        "Plese Login to Continue",
+        backgroundColor: Colors.green,
+      );
+
+      Get.to(() => const HomePage());
+    } catch (e) {
+      Get.snackbar("Error", e.toString(), backgroundColor: Colors.red);
+    }
   }
   // login function
 
@@ -46,10 +54,33 @@ class AuthController extends GetxController {
       Get.snackbar("Error", ex.toString(), backgroundColor: Colors.red);
     }
   }
-  // logout function
 
+  // logout function
   void logout() async {
     await auth.signOut();
+  }
+
+  Future<void> storeUserName() async {
+    try {
+      if (auth.currentUser != null && auth.currentUser!.uid.isNotEmpty) {
+        userModel.value = UserModel(
+          userName: userName.text,
+          email: email.text,
+        );
+
+        // Store the user data in the firestore
+        firestore
+            .collection("users")
+            .doc(auth.currentUser!.uid)
+            .collection("note")
+            .doc(auth.currentUser!.uid)
+            .set(userModel.value!.toJson());
+      } else {
+        return;
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString(), backgroundColor: Colors.red);
+    }
   }
 
   Future<void> getUserData() async {
@@ -58,20 +89,27 @@ class AuthController extends GetxController {
       final user = auth.currentUser;
 
       // Check if the user is not nullou
-      if (user != null) {
-        final collectionRef =
-            await firestore.collection("users").doc(user.uid).get();
+      if (user != null && user.uid.isNotEmpty) {
+        final collectionRef = await firestore
+            .collection("users")
+            .doc(user.uid)
+            .collection("note")
+            .doc(user.uid)
+            .get();
 
         // If the user is not null, we will get the user data
-        final data = collectionRef.data() as Map<String, dynamic>;
+        final data = collectionRef.data();
 
-        // We will update the user model
-        userModel.value = UserModel(
-          email: data["email"],
-          userName: data["userName"],
-        );
+        if (data != null) {
+          userModel.value!.userName = data["userName"];
+          userModel.value!.email = data["email"];
 
-        print(userModel.value!.userName);
+          userModel.refresh();
+        } else {
+          return;
+        }
+      } else {
+        return;
       }
     } catch (ex) {
       Get.snackbar("Error", ex.toString(), backgroundColor: Colors.red);
@@ -79,8 +117,8 @@ class AuthController extends GetxController {
   }
 
   @override
-  void onInit() {
-    getUserData();
+  void onInit() async {
     super.onInit();
+    await getUserData();
   }
 }
