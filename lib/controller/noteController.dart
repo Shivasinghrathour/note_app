@@ -42,6 +42,7 @@ class NoteController extends GetxController {
         note: addnote.text,
         des: adddes.text,
         id: uuid.v4(),
+        searchBy: addnote.text.toLowerCase(),
       );
       await db
           .collection("users")

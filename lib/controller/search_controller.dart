@@ -13,23 +13,24 @@ class FirebaseSearchController extends GetxController {
 
   Future<void> getSearchResult({required String searchKeyword}) async {
     try {
-      final allNotes = await firestore
+      final allNotes = firestore
           .collection("users")
           .doc(auth.currentUser!.uid)
           .collection("note")
-          .get();
+          .where("searchBy", isEqualTo: searchKeyword.toLowerCase());
 
-      searchList.clear();
+      final querySnapshot = await allNotes.get();
 
-      for (var doc in allNotes.docs) {
-        if (doc["note"].contains(searchKeyword)) {
-          searchList.add(doc.data()["note"]);
-
-          // Update the UI
-          searchList.refresh();
-        } else {
-          return;
+      if (querySnapshot.docs.isNotEmpty) {
+        searchList.clear();
+        for (final doc in querySnapshot.docs) {
+          searchList.add(doc["note"]);
         }
+
+        print(searchList);
+      } else {
+        searchList.clear();
+        return;
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
